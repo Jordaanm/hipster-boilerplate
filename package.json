@@ -31,8 +31,15 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
-    "webpack": "^1.13.1"
+    "redux": "^3.5.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "source-map-loader": "^0.1.5",
+    "webpack": "^1.13.1"
+  }
 }

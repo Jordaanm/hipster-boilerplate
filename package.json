@@ -4,7 +4,7 @@
   "description": "Application Boilerplate based on the 2016 Hipster Stack",
   "main": "index.js",
   "scripts": {
-    "start": "npm start-dev",
+    "start": "npm run start-dev",
     "build": "npm run build-dev",
     "start-dev": "cross-env NODE_ENV=development node ./index.js",
     "start-prod": "cross-env NODE_ENV=production node ./index.js",
@@ -32,6 +32,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "babel-runtime": "^6.9.2",
     "cross-env": "^1.0.8",
     "express": "^4.13.3",
     "react": "^15.1.0",

@@ -1,26 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from '../common/store';
-import Counter from '../common/components/Counter';
-import DevTools from '../common/containers/DevTools';
-import './../styles/app.less';
+import rootComponent from '../common/rootComponent';
 
-const store = createStore(0);
+let initialState = window.__INITIAL_STATE__ || null;
+
+const store = createStore(initialState);
 const rootEl = document.getElementById('root');
 
-function render() {
-	ReactDOM.render(
-		<div>
-			<Counter
-				value={store.getState()}
-				onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-				onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-			/>
-			{ __DEV__ && <DevTools store={store} /> }
-		</div>,
-		rootEl  
-	);
-}
-
-render();
-store.subscribe(render);
+const component = rootComponent(store); 
+ReactDOM.render(component, rootEl);

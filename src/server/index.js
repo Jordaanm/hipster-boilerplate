@@ -1,6 +1,6 @@
 import express from "express";
 import path from 'path';
-
+import reactApp from './app';
 // Register feature flags
 global.__DEV__ = ('development' === process.env.NODE_ENV);
 
@@ -12,9 +12,7 @@ let staticPath = path.join(__dirname, '../../dist');
 app.use('/assets', express.static(staticPath));
 
 //Handle root requests
-app.get("/", function(req, res){
-	res.sendFile(path.join(__dirname, '../index.html'));
-});
+app.get("/", reactApp);
 
 
 app.listen(3000, function() {

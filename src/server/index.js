@@ -12,7 +12,7 @@ let staticPath = path.join(__dirname, '../../dist');
 app.use('/assets', express.static(staticPath));
 
 //Handle root requests
-app.get("/", reactApp);
+app.get("*", reactApp);
 
 
 app.listen(3000, function() {

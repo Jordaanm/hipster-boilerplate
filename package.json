@@ -4,7 +4,12 @@
   "description": "Application Boilerplate based on the 2016 Hipster Stack",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
+    "start": "npm start-dev",
+    "build": "npm run build-dev",
+    "start-dev": "cross-env NODE_ENV=development node ./index.js",
+    "start-prod": "cross-env NODE_ENV=production node ./index.js",
+    "build-dev": "cross-env NODE_ENV=development webpack",
+    "build-prod": "cross-env NODE_ENV=production webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,6 +32,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "cross-env": "^1.0.8",
     "express": "^4.13.3",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -38,8 +44,13 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "style-loader": "^0.13.1",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
+    "redux-logger": "^2.6.1",
+    "redux-slider-monitor": "^1.0.6",
     "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.1"
   }
 }

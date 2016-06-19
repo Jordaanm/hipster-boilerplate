@@ -1,5 +1,10 @@
 import express from "express";
 import path from 'path';
+
+// Register feature flags
+global.__DEV__ = ('development' === process.env.NODE_ENV);
+
+//Express App
 let app = express();
 
 //Serve static assets from the build output folder

@@ -2,6 +2,27 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
+var isDev = process.env.NODE_ENV === 'development';
+
+var envPlugin;
+if(isDev) {
+	envPlugin = {
+		'process.env': {
+			'NODE_ENV': '"development"'
+		},
+		__DEV__: 'true'
+	};
+}
+else {
+	envPlugin = {
+		'process.env': {
+			'NODE_ENV': '"production"'
+		},
+		__DEV__: 'false'
+	};
+}
+
+
 module.exports = {
 	devtool: 'source-map',
 	entry: [
@@ -14,7 +35,8 @@ module.exports = {
 		publicPath: '/assets/'
 	},
 	plugins: [
-		new ExtractTextPlugin('styles.css', {allChunks: true})
+		new ExtractTextPlugin('styles.css', {allChunks: true}),
+		new webpack.DefinePlugin(envPlugin)
 	],
 	module: {
 		preLoaders: [

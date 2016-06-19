@@ -5,6 +5,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var isDev = process.env.NODE_ENV === 'development';
 
 var envPlugin;
+var plugins = [
+	new webpack.optimize.OccurenceOrderPlugin(),
+	new ExtractTextPlugin('styles.css', {allChunks: true}),
+];
+
 if(isDev) {
 	envPlugin = {
 		'process.env': {
@@ -12,6 +17,13 @@ if(isDev) {
 		},
 		__DEV__: 'true'
 	};
+
+	plugins = plugins.concat([
+	    new webpack.HotModuleReplacementPlugin(),
+	    new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin(envPlugin)
+	]);
+
 }
 else {
 	envPlugin = {
@@ -20,12 +32,18 @@ else {
 		},
 		__DEV__: 'false'
 	};
+
+	plugins = plugins.concat([
+		new webpack.DefinePlugin(envPlugin)
+	]);
+
 }
 
 
 module.exports = {
 	devtool: 'source-map',
 	entry: [
+		'webpack-hot-middleware/client',
 		'./src/client/index.js'
 	],
 	output: {
@@ -34,10 +52,7 @@ module.exports = {
         chunkFilename: "[id].js",
 		publicPath: '/assets/'
 	},
-	plugins: [
-		new ExtractTextPlugin('styles.css', {allChunks: true}),
-		new webpack.DefinePlugin(envPlugin)
-	],
+	plugins: plugins,
 	module: {
 		preLoaders: [
 			{
@@ -52,9 +67,24 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				loaders: [ 'babel' ],
+				loader: 'babel',
 				exclude: /node_modules/,
-				include: __dirname
+				include: __dirname,
+				query: {
+					"env": {
+						"development": {
+							"plugins": [
+								["react-transform", {
+									"transforms": [{
+										"transform": "react-transform-hmr",
+										"imports": ["react"],
+										"locals": ["module"]
+									}]
+								}]
+							]
+						}
+					}					
+				}
 			}
 		]
 	}

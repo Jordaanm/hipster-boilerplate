@@ -5,8 +5,8 @@ import path from 'path';
 import ReactDOMServer from 'react-dom/server';
 import { createMemoryHistory, match } from 'react-router';
 import createStore from '../common/store';
-import getRoutes from '../common/routes';
-import rootComponent from '../common/rootComponent';
+import routes from '../common/routes';
+import Root from '../common/root';
 
 let template = fs.readFileSync(path.join(__dirname, "index.html"), 'utf8');
 
@@ -29,9 +29,10 @@ export default function renderApp(req, res) {
 	const history = createMemoryHistory(req.originalUrl);
 	const store = createStore(initialState);
 	const state = store.getState();
-	const html = ReactDOMServer.renderToString(rootComponent(store, history));
 
-	match({ history, routes: getRoutes(store), location: req.originalUrl }, function(error, redirectLocation, renderProps){
+	const html = ReactDOMServer.renderToString(Root({store, history, routes}));
+
+	match({ history, routes: routes, location: req.originalUrl }, function(error, redirectLocation, renderProps){
 
 		if(redirectLocation) {
 			res.redirect(redirectLocation.pathName + redirectLocation.search);

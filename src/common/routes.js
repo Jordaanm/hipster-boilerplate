@@ -6,11 +6,9 @@ import App from './containers/App';
 import Home from './containers/Home';
 import NotFound from './components/NotFound';
 
-export default function(store){
-	return (
-		<Route path="/" component="App">
-			<IndexRoute component={Home}/>
-			<Route path="*" component={NotFound} status={404} />
-		</Route>
-	);
-}
+export default (
+	<Route path="/" component="App">
+		<IndexRoute component={Home}/>
+		<Route path="*" component={NotFound} status={404} />
+	</Route>
+);

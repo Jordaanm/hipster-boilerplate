@@ -1,7 +1,8 @@
 import { compose, createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
 import reduxLogMiddleware from 'redux-logger';
 import DevTools from  './containers/Devtools';
+
+import rootReducer from './reducers';
 
 export default function(initialState) {
 
@@ -18,6 +19,13 @@ export default function(initialState) {
 	}
 
 	let store = createStore(rootReducer, initialState, enhancer);
+
+
+	if (__DEV__ && module.hot) {
+		module.hot.accept('./reducers', () => {
+			store.replaceReducer(require('./reducers').default);
+		});
+	}
 
 	return store;
 }

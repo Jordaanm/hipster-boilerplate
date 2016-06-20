@@ -2,6 +2,11 @@
   "name": "redux-boilerplate",
   "version": "1.0.0",
   "description": "Application Boilerplate based on the 2016 Hipster Stack",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jordaanm/hipster-boilerplate.git"
+  },
+  "homepage":"https://github.com/Jordaanm/hipster-boilerplate",
   "main": "index.js",
   "scripts": {
     "start": "npm run start-dev",
